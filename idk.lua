@@ -1,3 +1,6 @@
+-- Script Unificado
+
+-- Script 1
 local url = "https://raw.githubusercontent.com/realorbtastra/orbt/main/FullOrbt"
 local code = 'loadstring(game:HttpGet("'..url..'"))()'
 
@@ -7,18 +10,33 @@ if queue_on_teleport then
     queue_on_teleport(code)
 elseif queueonteleport then
     queueonteleport(code)
-end
+end 
+
+-- Script 2
+local Players = game:GetService("Players")
+local lp = Players.LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputBegan:Connect(function(input, gpe)
+    if gpe then return end
+    if input.KeyCode == Enum.KeyCode.T then 
+        local char = lp.Character or lp.CharacterAdded:Wait()
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = hrp.CFrame * CFrame.new(30, 0, 0)
+        end
+    end
+end)
+
+-- Script 3
 local UIS = game:GetService("UserInputService")
+local Mouse = lp:GetMouse()
 
-local Player = game.Players.LocalPlayer
-local Mouse = Player:GetMouse()
-
-
-function GetCharacter()
-   return game.Players.LocalPlayer.Character
+local function GetCharacter()
+   return lp.Character
 end
 
-function Teleport(pos)
+local function Teleport(pos)
    local Char = GetCharacter()
    if Char then
        Char:MoveTo(pos)
@@ -30,17 +48,3 @@ UIS.InputBegan:Connect(function(input)
        Teleport(Mouse.Hit.p)
    end
 end)
-
-local Players = game:GetService("Players")
-local lp = Players.LocalPlayer
-local UserInputService = game:GetService("UserInputService")
-
-UserInputService.InputBegan:Connect(function(input, gpe)
-    if gpe then return end
-    if input.KeyCode == Enum.KeyCode.T then
-        local char = lp.Character or lp.CharacterAdded:Wait()
-        local hrp = char:FindFirstChild("HumanoidRootPart")
-        if hrp then
-            hrp.CFrame = hrp.CFrame * CFrame.new(30, 0, 0)
-        end
-    end
