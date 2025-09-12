@@ -1,2 +1,4 @@
-AdminForShelby
-AdminForAstra
+return {
+    "AdminForShelby",
+    "AdminForAstra"
+}
